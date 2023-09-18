@@ -29,14 +29,11 @@ def gen_markup(type_of_request: str):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    print(call.data)
-    print(call.chat_instance)
-    print(call.message.chat.id)
-    argLoad = call.data.split(',')
+    argLoad = call.data.split(', ')
     if argLoad[0] == "GET":
-        bot.send_message(call.message.chat.id, dbParser.getHomework(call.data))
+        bot.send_message(call.message.chat.id, dbParser.getHomework(argLoad))
     if argLoad[0] == "POST":
-        bot.send_message(call.message.chat.id, dbParser.addHomework(call.data))
+        bot.send_message(call.message.chat.id, dbParser.addHomework(argLoad))
 
 @bot.message_handler(commands=['start, help'])
 def start(message):
